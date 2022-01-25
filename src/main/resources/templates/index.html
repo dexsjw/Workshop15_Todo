@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/bootstrap.min.css">
+    <title>My To Do</title>
+</head>
+<body>
+
+    <div class="containter">
+        <div class="row" mt-2>
+            <div class="col"></div>
+            <div class="col">
+                <section>
+                    <h1>My To Do</h1>
+                </section>
+            </div>
+            <div class="col"></div>
+        </div>
+
+        <section>
+            <form action="/task" method="POST">
+                <div class="input-group mb-3 w-50">
+                    <input type="text" name="task" id="task" class="form-control" placeholder="Please enter a task"
+                        data-th-value="${task}">
+                    <button type="submit" class="btn btn-outline-secondary">Add Task</button>
+                    <button type="submit" class="btn btn-outline-secondary" formmethod="POST" formaction="/task/save">Save Task</button>
+                    <button type="submit" class="btn btn-outline-secondary" formmethod="POST" formaction="/task/get">Get Task</button>
+                </div>        
+                <div>
+                    <input type="hidden" name="hiddenTasks" id="tasks" data-th-value="${hiddenTasks}"></input>
+                </div>
+                <div  data-th-if="${hiddenTasks} == null">
+                    <h2>You have no tasks currently</h2>
+                </div>
+                <div data-th-if="${hiddenTasks} != null">
+                    <h2>Your Task List</h2>
+                    <ol>
+                        <li data-th-each="t: ${tasks}">
+                            <span data-th-text="${t}"></span>
+                        </li>
+                    </ol>
+                </div>
+            </form>
+        </section>
+    </div>
+
+</body>
+</html>
